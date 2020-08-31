@@ -1,0 +1,17 @@
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\bin\Debug\SpotlightWPF.exe.config
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\bin\Debug\SpotlightWPF.exe
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\bin\Debug\SpotlightWPF.pdb
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.csprojAssemblyReference.cache
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\MainWindow.g.cs
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\App.g.cs
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF_MarkupCompile.cache
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF_MarkupCompile.lref
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\MainWindow.baml
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.g.resources
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.Properties.Resources.resources
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.csproj.GenerateResource.cache
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.csproj.CoreCompileInputs.cache
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.exe
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.pdb
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.csproj.ResolveComReference.cache
