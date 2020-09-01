@@ -15,3 +15,6 @@ C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.e
 C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.pdb
 C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\Interop.IWshRuntimeLibrary.dll
 C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.csproj.ResolveComReference.cache
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SettingsWindow.g.cs
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SettingsWindow.baml
+C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\App.baml

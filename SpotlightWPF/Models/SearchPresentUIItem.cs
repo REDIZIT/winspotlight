@@ -1,5 +1,5 @@
-﻿using Spotlight.AppManagement;
-using System;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +16,8 @@ namespace SpotlightWPF.Models
         private Rectangle panel;
         private TextBlock nameText, subNameText;
         private Image image, infoImage;
+
+        //private readonly Brush defaultNameBrush;
 
 
         public SearchPresentUIItem(StackPanel parent)
@@ -40,15 +42,18 @@ namespace SpotlightWPF.Models
             {
                 Text = "Name",
                 Margin = new Thickness(70, 8, 0, 0),
-                FontSize = 20
+                FontSize = 20,
+                Style = Application.Current.FindResource("TextBlockStyle") as Style
             };
             this.nameText = nameText;
+            //defaultNameBrush = nameText.Foreground;
+
             TextBlock subText = new TextBlock()
             {
                 Text = "Window app",
                 Margin = new Thickness(70, 32, 0, 0),
                 FontSize = 12,
-                Foreground = Brushes.Gray
+                Style = Application.Current.FindResource("TextBlockStyle") as Style
             };
             subNameText = subText;
 
@@ -101,6 +106,8 @@ namespace SpotlightWPF.Models
             nameText.Text = item.displayName;
             subNameText.Text = item.displaySubName;
 
+            nameText.Style = Application.Current.FindResource("TextBlockStyle") as Style;
+            subNameText.Style = Application.Current.FindResource("TextBlockStyle") as Style;
 
             BitmapImage bitmapImage = BitmapToImageSource(item.iconBitmap);
             image.Source = bitmapImage;
@@ -110,12 +117,16 @@ namespace SpotlightWPF.Models
         public void Select()
         {
             panel.Fill = new SolidColorBrush(Color.FromRgb(0, 128, 255));
-            subNameText.Foreground = new SolidColorBrush(Color.FromRgb(45, 45, 128));
+            //subNameText.Foreground = new SolidColorBrush(Color.FromRgb(45, 45, 128));
+            subNameText.Style = Application.Current.FindResource("TextBlockSelectedStyle") as Style;
+            nameText.Style = Application.Current.FindResource("TextBlockSelectedStyle") as Style;
         }
         public void Deselect()
         {
             panel.Fill = Brushes.Transparent;
-            subNameText.Foreground = Brushes.Gray;
+            nameText.Style = Application.Current.FindResource("TextBlockStyle") as Style;
+            subNameText.Style = Application.Current.FindResource("TextBlockStyle") as Style;
+            //subNameText.Foreground = Brushes.Gray;
         }
 
         public void ShowInfo(object s, RoutedEventArgs e)

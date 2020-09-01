@@ -4,8 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows;
-//using System.Windows.Forms;
+using System.Windows.Forms;
 
 namespace SpotlightWPF.Indexing
 {
@@ -86,6 +85,9 @@ namespace SpotlightWPF.Indexing
             special.Add(new SearchFileItem("Notepad", "Приложение", @"C:\Windows\System32\notepad.exe"));
             special.Add(new SearchFileItem("Calculator", "Приложение", @"C:\Windows\System32\calc.exe"));
             special.Add(new SearchDelegateItem("Close", "Spotlight", (item) => mainWindow.CloseWindow()));
+            special.Add(new SearchDelegateItem("Settings", "Spotlight", (item) => mainWindow.OpenSettings()));
+            special.Add(new SearchDelegateItem("Sleep", "Spotlight", (item) => Application.SetSuspendState(PowerState.Suspend, true, true)));
+            special.Add(new SearchDelegateItem("Hibernate", "Spotlight", (item) => Application.SetSuspendState(PowerState.Hibernate, true, true)));
 
 
             windowsApps.AddRange(Indexator.GetInstalledApps());

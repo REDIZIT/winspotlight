@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace SpotlightWPF
 {
@@ -55,12 +56,31 @@ namespace SpotlightWPF
                 Visible = true
             };
             trayIcon.Click += (s, e) => ShowWindow();
+
+
+            //Timer timer = new Timer()
+            //{
+            //    Interval = 1000
+            //};
+            //timer.Tick += (s, e) =>
+            //{
+            //    if (WpfExtensions.IsWindowOpen<MainWindow>())
+            //    {
+            //        MessageBox.Show("Active");
+            //    }
+            //};
+            //timer.Start();
         }
 
         public void CloseWindow()
         {
             trayIcon.Dispose();
             System.Windows.Application.Current.Shutdown();
+        }
+        public void OpenSettings()
+        {
+            SettingsWindow window = new SettingsWindow();
+            window.Show();
         }
 
 
@@ -109,11 +129,14 @@ namespace SpotlightWPF
         {
             if (e.Key == Key.Down || e.Key == Key.Up)
             {
-                presentModels[SelectedIndex].Deselect();
+                if(presentModels.Count > 0)
+                {
+                    presentModels[SelectedIndex].Deselect();
 
-                SelectedIndex += e.Key == Key.Up ? -1 : 1;
+                    SelectedIndex += e.Key == Key.Up ? -1 : 1;
 
-                presentModels[SelectedIndex].Select();
+                    presentModels[SelectedIndex].Select();
+                }
             }
 
             if (e.Key == Key.Enter)
@@ -133,7 +156,11 @@ namespace SpotlightWPF
 
             Show();
             Activate();
-            searchBox.Focus();
+
+            (searchBox as System.Windows.Controls.Control).Focus();
+            //searchBox.Focus();
+
+            //MessageBox.Show(Focus)
         }
 
         private void HideWindow()

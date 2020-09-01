@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotlightWPF"
         mc:Ignorable="d"
-        Title="Spotlight" Height="60" Width="700
-" WindowStyle="None" AllowsTransparency="True" Foreground="White" Background="#FF1C2028" ResizeMode="NoResize" Icon="Images/spotlight.ico" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" Deactivated="Window_Deactivated"
+        Title="Spotlight" Height="60" Width="700" Style="{DynamicResource WindowStyle}" WindowStyle="None" AllowsTransparency="True" Foreground="White" ResizeMode="NoResize" Icon="Images/spotlight.ico" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" Deactivated="Window_Deactivated"
 >
 
+    <Border Background="Transparent" BorderBrush="#4C808080" BorderThickness="1">
+        <Grid>
 
-    <Grid>
+            <TextBox Name="searchBox" Style="{DynamicResource TextBoxStyle}"  Height="40" TextWrapping="Wrap" Width="680" FontSize="20" Background="#00161A21" BorderThickness="0" Padding="0, 5" TextChanged="TextBox_TextChanged" Margin="16,11,0,0" VerticalAlignment="Top" PreviewKeyDown="Window_KeyDown"/>
+            <StackPanel Name="ui" VerticalAlignment="Top" Margin="0,60,0,0" >
 
-        <TextBox Name="searchBox" Height="40" TextWrapping="Wrap" Width="680" FontSize="20" Background="#00161A21" Foreground="White" BorderThickness="0" Padding="0, 5" TextChanged="TextBox_TextChanged" Margin="16,11,0,0" VerticalAlignment="Top" PreviewKeyDown="Window_KeyDown"/>
-        <StackPanel Name="ui" VerticalAlignment="Top" Margin="0,60,0,0" >
-
-        </StackPanel>
-    </Grid>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

@@ -1,0 +1,13 @@
+﻿<Window x:Class="SpotlightWPF.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpotlightWPF"
+        mc:Ignorable="d"
+        Title="Settings" Height="259.688" Width="425.938" Style="{DynamicResource WindowStyle}" Icon="Images/spotlight.ico">
+    <Grid>
+        <ComboBox Name="themesBox" HorizontalAlignment="Left" Margin="68,18,0,0" VerticalAlignment="Top" Width="124" Background="#00161A21" Text="dark" />
+        <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="26,18,0,0" TextWrapping="Wrap" Text="Тема" VerticalAlignment="Top" Height="24" Width="37" Padding="0, 4"/>
+    </Grid>
+</Window>
