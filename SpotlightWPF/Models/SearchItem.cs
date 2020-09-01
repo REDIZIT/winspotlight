@@ -48,7 +48,16 @@ namespace SpotlightWPF.Models
 
         public override void Execute(bool isAdmin)
         {
-            AppsLauncher.RunFile(this, isAdmin);
+            try
+            {
+                AppsLauncher.RunFile(this, isAdmin);
+            }
+            catch
+            {
+                AppsLauncher.RunLink(this, isAdmin);
+            }
+            //if(Path.GetExtension(path) == ".lnk") 
+            //else
         }
     }
 
