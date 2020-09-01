@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotlightWPF.Settings;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -13,24 +14,20 @@ namespace SpotlightWPF
         {
             InitializeComponent();
 
+            
+
             List<string> styles = new List<string> { "light", "dark" };
             themesBox.ItemsSource = styles;
-            themesBox.SelectedItem = "dark";
+            themesBox.SelectedItem = SettingsWrapper.Settings.SelectedTheme;
 
-            themesBox.SelectionChanged += (s, e) => OnThemeChange();
-        }
+            themesBox.SelectionChanged += (s, e) =>
+            {
+                string style = themesBox.SelectedItem as string;
+                ThemeManager.ApplyTheme(style);
 
-        private void OnThemeChange()
-        {
-            string style = themesBox.SelectedItem as string;
-            // определяем путь к файлу ресурсов
-            var uri = new Uri("Themes/" + style + ".xaml", UriKind.Relative);
-            // загружаем словарь ресурсов
-            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
-            // очищаем коллекцию ресурсов приложения
-            Application.Current.Resources.Clear();
-            // добавляем загруженный словарь ресурсов
-            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+                SettingsWrapper.Settings.SelectedTheme = style;
+                SettingsWrapper.Save();
+            };
         }
     }
 }

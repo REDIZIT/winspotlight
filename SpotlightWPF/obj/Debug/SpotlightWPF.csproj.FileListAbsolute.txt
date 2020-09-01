@@ -18,3 +18,26 @@ C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SpotlightWPF.c
 C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SettingsWindow.g.cs
 C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\SettingsWindow.baml
 C:\Users\REDIZIT\source\repos\SpotlightWPF\SpotlightWPF\obj\Debug\App.baml
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\bin\Debug\SpotlightWPF.exe.config
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\bin\Debug\SpotlightWPF.exe
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SpotlightWPF.csprojAssemblyReference.cache
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SpotlightWPF.csproj.ResolveComReference.cache
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\MainWindow.g.cs
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SettingsWindow.g.cs
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\App.g.cs
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SpotlightWPF_MarkupCompile.cache
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SpotlightWPF_MarkupCompile.lref
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\App.baml
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\MainWindow.baml
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SettingsWindow.baml
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SpotlightWPF.g.resources
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SpotlightWPF.Properties.Resources.resources
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SpotlightWPF.csproj.GenerateResource.cache
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SpotlightWPF.csproj.CoreCompileInputs.cache
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SpotlightWPF.exe
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SpotlightWPF.pdb
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\bin\Debug\SpotlightWPF.pdb
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\bin\Debug\Newtonsoft.Json.dll
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\bin\Debug\Newtonsoft.Json.xml
+C:\# Data #\GitHub Projects\winspotlight\SpotlightWPF\obj\Debug\SpotlightWPF.csproj.CopyComplete

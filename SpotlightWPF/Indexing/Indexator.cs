@@ -16,7 +16,7 @@ namespace SpotlightWPF.Indexing
         {
             List<SearchFileItem> result = new List<SearchFileItem>();
 
-            //GetAppsInRoamingPrograms(result);
+            GetAppsInRoamingPrograms(result);
             GetAppsFromRegister(result);
 
             result = result.DistinctBy(c => c.path).ToList();

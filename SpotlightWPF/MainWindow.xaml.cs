@@ -2,6 +2,7 @@
 using SpotlightWPF.Hotkey;
 using SpotlightWPF.Indexing;
 using SpotlightWPF.Models;
+using SpotlightWPF.Settings;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,6 +37,8 @@ namespace SpotlightWPF
         {
             InitializeComponent();
 
+            ThemeManager.ApplyTheme(SettingsWrapper.Settings.SelectedTheme);
+
             for (int i = 0; i < 6; i++)
             {
                 CreateItem();
@@ -56,7 +59,6 @@ namespace SpotlightWPF
                 Visible = true
             };
             trayIcon.Click += (s, e) => ShowWindow();
-
 
             //Timer timer = new Timer()
             //{
@@ -158,6 +160,8 @@ namespace SpotlightWPF
             Activate();
 
             (searchBox as System.Windows.Controls.Control).Focus();
+
+            InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("en-US"));
             //searchBox.Focus();
 
             //MessageBox.Show(Focus)
