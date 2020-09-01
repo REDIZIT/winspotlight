@@ -10,19 +10,17 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
-using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace SpotlightWPF
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Spotlight main window
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Searcher searcher;
-
-
         public List<SearchPresentUIItem> presentModels = new List<SearchPresentUIItem>();
+
+
         public int SelectedIndex
         {
             get { return _selectedIndex; }
@@ -31,6 +29,8 @@ namespace SpotlightWPF
         private int _selectedIndex;
 
 
+
+        private readonly Searcher searcher;
         private readonly NotifyIcon trayIcon;
 
 
@@ -42,11 +42,13 @@ namespace SpotlightWPF
 
             ThemeManager.ApplyTheme(SettingsWrapper.Settings.SelectedTheme);
 
+            // Create search slots
             for (int i = 0; i < 6; i++)
             {
                 CreateItem();
             }
             presentModels[0].Select();
+
 
             searcher = new Searcher(this);
 
@@ -62,19 +64,6 @@ namespace SpotlightWPF
                 Visible = true
             };
             trayIcon.Click += (s, e) => ShowWindow();
-
-            //Timer timer = new Timer()
-            //{
-            //    Interval = 1000
-            //};
-            //timer.Tick += (s, e) =>
-            //{
-            //    if (WpfExtensions.IsWindowOpen<MainWindow>())
-            //    {
-            //        MessageBox.Show("Active");
-            //    }
-            //};
-            //timer.Start();
         }
 
         public void CloseWindow()
@@ -158,16 +147,13 @@ namespace SpotlightWPF
         {
             searchBox.Text = "";
             Height = 60;
-
             Show();
             Activate();
 
-            (searchBox as System.Windows.Controls.Control).Focus();
+            searchBox.Focus();
 
+            // Change input language to english
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("en-US"));
-            //searchBox.Focus();
-
-            //MessageBox.Show(Focus)
         }
 
         private void HideWindow()

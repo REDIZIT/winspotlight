@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Spotlight.AppManagement;
 using Spotlight.Apps;
 using Spotlight.Extensions;
 using SpotlightWPF.Models;
@@ -11,6 +12,45 @@ namespace SpotlightWPF.Indexing
 {
     public static class Indexator
     {
+        /// <summary>Index all that we can and return result</summary>
+        public static List<SearchItem> IndexAll()
+        {
+            List<SearchItem> result = new List<SearchItem>();
+
+
+            // Index all files on desktop
+            //
+            string[] desktopFolders = new string[2] { @"C:\Users\Public\Desktop", Environment.GetFolderPath(Environment.SpecialFolder.Desktop) };
+            for (int i = 0; i < desktopFolders.Length; i++)
+            {
+                IndexFilesInFolder(desktopFolders[i], result);
+            }
+
+
+            // Add Windows default apps
+            //
+            result.Add(new SearchFileItem("Notepad", "Windows default app", @"C:\Windows\System32\notepad.exe"));
+            result.Add(new SearchFileItem("Calculator", "Windows default app", @"C:\Windows\System32\calc.exe"));
+
+
+            return result;
+        }
+
+
+
+
+        /// <summary>Fill list with files in folder</summary>
+        public static void IndexFilesInFolder(string path, List<SearchItem> listToFill)
+        {
+            foreach (string file in Directory.GetFiles(path))
+            {
+                listToFill.Add(new SearchFileItem(Path.GetFileName(file), "Desktop", file)
+                {
+                    iconBitmap = AppsIconExtractor.GetAppIconBitmap(file)
+                });
+            }
+        }
+
         /// <summary>Get Windows installed apps</summary>
         public static List<SearchFileItem> GetInstalledApps()
         {

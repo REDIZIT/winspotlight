@@ -8,13 +8,19 @@ namespace SpotlightWPF
 {
     public partial class SettingsWindow : Window
     {
+        private readonly Searcher searcher;
+
         public SettingsWindow(Searcher searcher)
         {
             InitializeComponent();
+            this.searcher = searcher;
 
+            RefreshThemeBox();
+            RefreshIndexIntervalsBox();
+        }
 
-
-
+        private void RefreshThemeBox()
+        {
             List<string> styles = new List<string> { "light", "dark" };
             themesBox.ItemsSource = styles;
             themesBox.SelectedItem = SettingsWrapper.Settings.SelectedTheme;
@@ -27,11 +33,10 @@ namespace SpotlightWPF
                 SettingsWrapper.Settings.SelectedTheme = style;
                 SettingsWrapper.Save();
             };
+        }
 
-
-
-
-
+        private void RefreshIndexIntervalsBox()
+        {
             List<IntervalSelectionModel> intervalModels = new List<IntervalSelectionModel>()
             {
                 new IntervalSelectionModel("1 minute", 1),
@@ -56,25 +61,6 @@ namespace SpotlightWPF
 
                 searcher.UpdateTimerInterval();
             };
-        }
-
-
-
-        private class IntervalSelectionModel
-        {
-            public string DisplayText { get; set; }
-            public int Minutes { get; set; }
-
-            public IntervalSelectionModel(string displayText, int minutes)
-            {
-                DisplayText = displayText;
-                Minutes = minutes;
-            }
-
-            public override string ToString()
-            {
-                return DisplayText;
-            }
         }
     }
 }
