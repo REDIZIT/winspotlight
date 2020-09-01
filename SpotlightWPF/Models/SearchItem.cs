@@ -56,8 +56,6 @@ namespace SpotlightWPF.Models
             {
                 AppsLauncher.RunLink(this, isAdmin);
             }
-            //if(Path.GetExtension(path) == ".lnk") 
-            //else
         }
     }
 

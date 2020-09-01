@@ -4,10 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotlightWPF"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Settings" Height="259.688" Width="425.938" Style="{DynamicResource WindowStyle}" Icon="Images/spotlight.ico">
+        Title="Settings" Height="259.688" Width="413.495" Style="{DynamicResource WindowStyle}" Icon="Images/spotlight.ico">
     <Grid>
-        <ComboBox Name="themesBox" HorizontalAlignment="Left" Margin="68,18,0,0" VerticalAlignment="Top" Width="124" Background="#00161A21" Text="dark" />
-        <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="26,18,0,0" TextWrapping="Wrap" Text="Тема" VerticalAlignment="Top" Height="24" Width="37" Padding="0, 4"/>
+        <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="26,18,0,0" TextWrapping="Wrap" Text="Theme" VerticalAlignment="Top" Height="24" Width="45" Padding="0, 4"/>
+        <ComboBox Name="themesBox" HorizontalAlignment="Right" Margin="0,18,10,0" VerticalAlignment="Top" Width="124" Background="#00161A21" Text="dark" />
+
+        <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="26,47,0,0" TextWrapping="Wrap" Text="Index interval" VerticalAlignment="Top" Height="24" Width="145" Padding="0, 4"/>
+        <ComboBox x:Name="intevalBox" HorizontalAlignment="Right" Margin="0,47,10,0" VerticalAlignment="Top" Width="124" Background="#00161A21" Text="dark" >
+        </ComboBox>
     </Grid>
 </Window>

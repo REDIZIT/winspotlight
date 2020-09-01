@@ -1,5 +1,6 @@
 ﻿using Spotlight.AppManagement;
 using SpotlightWPF.Models;
+using SpotlightWPF.Settings;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +22,7 @@ namespace SpotlightWPF.Indexing
 
 
         private readonly MainWindow mainWindow;
+        private readonly Timer indexTimer;
 
 
         public Searcher(MainWindow mainWindow)
@@ -29,6 +31,12 @@ namespace SpotlightWPF.Indexing
             desktopFolders = new string[2] { @"C:\Users\Public\Desktop", Environment.GetFolderPath(Environment.SpecialFolder.Desktop) };
 
             IndexFiles();
+
+            // Initialize timer for runtime indexing files
+            indexTimer = new Timer();
+            UpdateTimerInterval();
+            indexTimer.Tick += (s, e) => IndexFiles();
+            indexTimer.Start();
         }
 
 
@@ -51,6 +59,17 @@ namespace SpotlightWPF.Indexing
 
             searchResults = searchResults.OrderByDescending(c => GetScore(c.displayName, str)).Where(c => GetScore(c.displayName, str) > 0).ToList();
         }
+
+        public void UpdateTimerInterval()
+        {
+            int intervalInMinutes = SettingsWrapper.Settings.IndexInterval > 1 ? SettingsWrapper.Settings.IndexInterval : 1;
+
+            indexTimer.Stop();
+            indexTimer.Interval = intervalInMinutes * 1000 * 60;
+            indexTimer.Start();
+        }
+
+
 
         /// <summary>Get all items and paste it into <see cref="searchResults"/></summary>
         private void GetSearchResult()
@@ -82,8 +101,8 @@ namespace SpotlightWPF.Indexing
             IndexFilesInFolder(desktopFolders[0], indexed);
             IndexFilesInFolder(desktopFolders[1], indexed);
 
-            special.Add(new SearchFileItem("Notepad", "Приложение", @"C:\Windows\System32\notepad.exe"));
-            special.Add(new SearchFileItem("Calculator", "Приложение", @"C:\Windows\System32\calc.exe"));
+            special.Add(new SearchFileItem("Notepad", "Windows default app", @"C:\Windows\System32\notepad.exe"));
+            special.Add(new SearchFileItem("Calculator", "Windows default app", @"C:\Windows\System32\calc.exe"));
             special.Add(new SearchDelegateItem("Close", "Spotlight", (item) => mainWindow.CloseWindow()));
             special.Add(new SearchDelegateItem("Settings", "Spotlight", (item) => mainWindow.OpenSettings()));
             special.Add(new SearchDelegateItem("Sleep", "Spotlight", (item) => Application.SetSuspendState(PowerState.Suspend, true, true)));
@@ -96,7 +115,7 @@ namespace SpotlightWPF.Indexing
         {
             foreach (string file in Directory.GetFiles(path))
             {
-                ls.Add(new SearchFileItem(Path.GetFileName(file), "Рабочий стол", file)
+                ls.Add(new SearchFileItem(Path.GetFileName(file), "Desktop", file)
                 {
                     iconBitmap = AppsIconExtractor.GetAppIconBitmap(file)
                 });

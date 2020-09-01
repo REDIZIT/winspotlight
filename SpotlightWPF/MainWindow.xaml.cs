@@ -19,6 +19,9 @@ namespace SpotlightWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Searcher searcher;
+
+
         public List<SearchPresentUIItem> presentModels = new List<SearchPresentUIItem>();
         public int SelectedIndex
         {
@@ -27,7 +30,7 @@ namespace SpotlightWPF
         }
         private int _selectedIndex;
 
-        private readonly Searcher searcher;
+
         private readonly NotifyIcon trayIcon;
 
 
@@ -81,7 +84,7 @@ namespace SpotlightWPF
         }
         public void OpenSettings()
         {
-            SettingsWindow window = new SettingsWindow();
+            SettingsWindow window = new SettingsWindow(searcher);
             window.Show();
         }
 
