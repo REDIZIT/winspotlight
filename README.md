@@ -4,7 +4,7 @@ Fast, light weighted, with fuzzy search, programs searcher and launcher.
 Fuzzy search allows you type **"tst"** and get **"test.txt"** file in list.  
 Lightweight, just a couple of megabytes on hard disk and 70-90mb in RAM.  
 
-![](GitHubDocumentation/preview.gif)
+![](https://drive.google.com/uc?export=view&id=1xEFu9jWlXviX7se-lOtl6pEBLLtigBTY)
 
 
 ## How To
