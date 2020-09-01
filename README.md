@@ -1,6 +1,6 @@
 # winspotlight
 Fast and light weighted file and programs searcher.
-[![winspotlight preview](https://img.youtube.com/vi/gRHQTOkY6Bk/0.jpg)](https://www.youtube.com/watch?v=gRHQTOkY6Bk)
+![](GitHubDocumentation/preview.gif)
 
 ## How To
 To open searcher use **Alt+C**.
