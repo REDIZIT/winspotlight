@@ -1,6 +1,6 @@
 # winspotlight
 Fast and light weighted file and programs searcher.
-![Title](https://youtu.be/gRHQTOkY6Bk "Title")
+[![winspotlight preview](https://img.youtube.com/vi/gRHQTOkY6Bk/0.jpg)](https://www.youtube.com/watch?v=gRHQTOkY6Bk)
 
 ## How To
 To open searcher use **Alt+C**.
