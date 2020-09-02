@@ -16,12 +16,14 @@ Lightweight, just a couple of megabytes on hard disk and 70-90mb in RAM.
 | `Shift` + `Enter` | Execute as **Admin**     |
 
 ## Commands
-| Command      | Description                     |
-| ------------ | ------------------------------- |
-| `Close`      | Close winspotlight              |
-| `Settings`   | Open settings                   |
-| `>{command}` | Run Windows (shortcut is `Win` + `R`) command like regedit, cmd, diskmgr and etc |
-| `Hibernate`  | Put computer to Hibernate       |
-| `Sleep`      | Put computer to Sleep           |
-| `Notepad`    | Open default Windows notepad    |
-| `Calculator` | Open default Windows calculator |
+| Command        | Description                     |
+| -------------- | ------------------------------- |
+| `Close`        | Close winspotlight              |
+| `Settings`     | Open settings                   |
+| `>{command}`   | Run Windows (shortcut is `Win` + `R`) command like regedit, cmd, diskmgr and etc |
+| `mute {app}`   | Mute running app                |
+| `unmute {app}` | Unmute running app              |
+| `Hibernate`    | Put computer to Hibernate       |
+| `Sleep`        | Put computer to Sleep           |
+| `Notepad`      | Open default Windows notepad    |
+| `Calculator`   | Open default Windows calculator |
