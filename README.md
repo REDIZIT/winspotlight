@@ -7,14 +7,21 @@ Lightweight, just a couple of megabytes on hard disk and 70-90mb in RAM.
 ![](https://drive.google.com/uc?export=view&id=1xEFu9jWlXviX7se-lOtl6pEBLLtigBTY)
 
 
-## How To
-Open searcher use **Alt+C**.  
-Move down and up use **Arrows**.  
-Execute selected program use **Enter**.  
-Execute as Admin **Shift+Enter**.  
-Run Windows command (like regedit, cmd, calc and etc) **">your command"**.  
-Close searcher type **"Close"** command.  
-Open settings type **"Settings"** command.  
+## Shortcuts
+| Key               | Action                   |
+| ----------------- | ------------------------ |
+| `Alt` + `C`       | Open searcher            |
+| `Arrows`          | Move down and up         |
+| `Enter`           | Execute selected program |
+| `Shift` + `Enter` | Execute as **Admin**     |
 
-## Other commands
-Hibernate, Sleep, Notepad, Calculator
+## Commands
+| Command      | Description                     |
+| ------------ | ------------------------------- |
+| `Close`      | Close winspotlight              |
+| `Settings`   | Open settings                   |
+| `>{command}` | Run Windows (shortcut is `Win` + `R`) command like regedit, cmd, diskmgr and etc |
+| `Hibernate`  | Put computer to Hibernate       |
+| `Sleep`      | Put computer to Sleep           |
+| `Notepad`    | Open default Windows notepad    |
+| `Calculator` | Open default Windows calculator |
