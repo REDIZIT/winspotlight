@@ -1,10 +1,10 @@
 ﻿using IWshRuntimeLibrary;
-using SpotlightWPF.Models;
+using Winspotlight.Models;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
 
-namespace Spotlight.Apps
+namespace Winspotlight.Apps
 {
     public static class AppsLauncher
     {

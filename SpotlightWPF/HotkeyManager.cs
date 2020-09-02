@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace SpotlightWPF.Hotkey
+namespace Winspotlight.Hotkey
 {
     public static class HotkeyManager
     {

@@ -1,4 +1,4 @@
-﻿namespace SpotlightWPF
+﻿namespace Winspotlight
 {
     public partial class SettingsWindow
     {

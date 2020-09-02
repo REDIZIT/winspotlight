@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
 
-namespace SpotlightWPF.Settings
+namespace Winspotlight.Settings
 {
     public static class SettingsWrapper
     {

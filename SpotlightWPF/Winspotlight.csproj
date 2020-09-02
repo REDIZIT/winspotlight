@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EBFC1DAC-DBF7-4630-942E-0CEBD3C9E80D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SpotlightWPF</RootNamespace>
-    <AssemblyName>SpotlightWPF</AssemblyName>
+    <RootNamespace>Winspotlight</RootNamespace>
+    <AssemblyName>Winspotlight</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -66,6 +66,11 @@
     </ApplicationDefinition>
     <Compile Include="Extensions\WpfExtensions.cs" />
     <Compile Include="Models\SettingsWindow\IntervalSelectionModel.cs" />
+    <Compile Include="Plugins\Embedded\MutePlugin\MutePluginCore.cs" />
+    <Compile Include="Plugins\Embedded\MutePlugin\SearchMuteItem.cs" />
+    <Compile Include="Plugins\Embedded\MutePlugin\WindowsSoundAPI.cs" />
+    <Compile Include="Plugins\PluginCore.cs" />
+    <Compile Include="Plugins\Embedded\WindowsCommandsPlugin.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -86,8 +91,8 @@
     <Compile Include="Extensions\MathUtils.cs" />
     <Compile Include="FuzzyMatch.cs" />
     <Compile Include="HotkeyManager.cs" />
-    <Compile Include="Indexing\Indexator.cs" />
-    <Compile Include="Indexing\Searcher.cs" />
+    <Compile Include="Searching\Indexator.cs" />
+    <Compile Include="Searching\Searcher.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -140,7 +145,9 @@
   <ItemGroup>
     <Resource Include="Images\info.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Plugins\Embedded\MutePlugin\Images\mute.png" />
+  </ItemGroup>
   <ItemGroup>
     <COMReference Include="IWshRuntimeLibrary">
       <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
@@ -151,6 +158,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Plugins\Embedded\MutePlugin\Images\unmute.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

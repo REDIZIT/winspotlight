@@ -1,4 +1,4 @@
-﻿namespace SpotlightWPF.Settings
+﻿namespace Winspotlight.Settings
 {
     public class SettingsModel
     {

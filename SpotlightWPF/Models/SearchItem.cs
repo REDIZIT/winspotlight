@@ -1,10 +1,10 @@
-﻿using Spotlight.AppManagement;
-using Spotlight.Apps;
+﻿using Winspotlight.AppManagement;
+using Winspotlight.Apps;
 using System;
 using System.Drawing;
 using System.IO;
 
-namespace SpotlightWPF.Models
+namespace Winspotlight.Models
 {
     public abstract class SearchItem
     {

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Spotlight.AppManagement
+namespace Winspotlight.AppManagement
 {
     public static class AppsIconExtractor
     {

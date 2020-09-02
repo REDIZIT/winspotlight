@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Windows;
 
-namespace SpotlightWPF.Extensions
+namespace Winspotlight.Extensions
 {
     public static class WpfExtensions
     {

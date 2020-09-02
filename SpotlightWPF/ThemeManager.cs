@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace SpotlightWPF
+namespace Winspotlight
 {
     public static class ThemeManager
     {

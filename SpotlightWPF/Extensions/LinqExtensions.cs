@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Spotlight.Extensions
+namespace Winspotlight.Extensions
 {
     public static class LinqExtensions
     {

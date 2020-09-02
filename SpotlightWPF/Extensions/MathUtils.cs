@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SpotlightWPF.Extensions
+namespace Winspotlight.Extensions
 {
     public static class MathUtils
     {

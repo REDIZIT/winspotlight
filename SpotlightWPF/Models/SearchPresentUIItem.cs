@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace SpotlightWPF.Models
+namespace Winspotlight.Models
 {
     public class SearchPresentUIItem
     {
@@ -98,8 +98,9 @@ namespace SpotlightWPF.Models
             parent.Children.Add(grid);
         }
 
-        public void Refresh(SearchItem item)
+        public void Refresh(SearchItem item, bool verbose)
         {
+            bool didItemChange = this.item != item;
             this.item = item;
 
             panel.Fill = Brushes.Transparent;
@@ -109,8 +110,16 @@ namespace SpotlightWPF.Models
             nameText.Style = Application.Current.FindResource("TextBlockStyle") as Style;
             subNameText.Style = Application.Current.FindResource("TextBlockStyle") as Style;
 
-            BitmapImage bitmapImage = BitmapToImageSource(item.iconBitmap);
-            image.Source = bitmapImage;
+            Stopwatch w = Stopwatch.StartNew();
+
+            if (didItemChange)
+            {
+                BitmapImage bitmapImage = BitmapToImageSource(item.iconBitmap);
+                image.Source = bitmapImage;
+            }
+
+            w.Stop();
+            if (verbose) MessageBox.Show($"Bitmap convert time {w.ElapsedMilliseconds}ms");
         }
 
 

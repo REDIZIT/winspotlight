@@ -1,15 +1,21 @@
-﻿using SpotlightWPF.Models;
-using SpotlightWPF.Settings;
+﻿using Winspotlight.Models;
+using Winspotlight.Settings;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Winspotlight.SearchListerners;
+using Winspotlight.Plugins;
+using Winspotlight.Plugins.Embedded;
 
-namespace SpotlightWPF.Indexing
+namespace Winspotlight.Indexing
 {
     public class Searcher
     {
         public List<SearchItem> searchResults = new List<SearchItem>();
         List<SearchItem> indexed = new List<SearchItem>();
+
+        public List<PluginCore> plugins = new List<PluginCore>();
+
 
         private readonly MainWindow mainWindow;
         private readonly Timer indexTimer;
@@ -26,6 +32,8 @@ namespace SpotlightWPF.Indexing
             UpdateTimerInterval();
             indexTimer.Tick += (s, e) => Index();
             indexTimer.Start();
+
+            AddSearchUpdateListeners();
         }
 
 
@@ -42,14 +50,15 @@ namespace SpotlightWPF.Indexing
             searchResults.Clear();
             searchResults.AddRange(indexed);
 
-            // If search string contains '>' prefix, add Run Windows command item in search results
-            if (str.StartsWith(">"))
+            // Going thro all plugins and searching
+            foreach (PluginCore plugin in plugins)
             {
-                string command = str.Substring(1, str.Length - 1);
-                SearchItem cls = new SearchCommandItem(">" + command, "Run Windows command", command);
-                searchResults.Add(cls);
-            }
+                IEnumerable<SearchItem> results = plugin.SearchItems(str);
+                if (results == null || results.Count() == 0) continue;
 
+                searchResults.AddRange(results);
+            }
+            
             // Select items which have FuzzySearch score > 0
             // Sort by score down
             searchResults = searchResults
@@ -85,6 +94,30 @@ namespace SpotlightWPF.Indexing
             indexed.Add(new SearchDelegateItem("Settings", "Spotlight", (item) => mainWindow.OpenSettings()));
             indexed.Add(new SearchDelegateItem("Sleep", "Spotlight", (item) => Application.SetSuspendState(PowerState.Suspend, true, true)));
             indexed.Add(new SearchDelegateItem("Hibernate", "Spotlight", (item) => Application.SetSuspendState(PowerState.Hibernate, true, true)));
+
+            // Ping plugins for reindex
+            //
+            foreach (PluginCore plugin in plugins)
+            {
+                plugin.Index();
+            }
+        }
+
+        public void OnWindowShown()
+        {
+            foreach (PluginCore plugin in plugins)
+            {
+                plugin.onWindowShown?.Invoke();
+            }
+        }
+
+
+
+
+        private void AddSearchUpdateListeners()
+        {
+            plugins.Add(new WindowsCommandsPlugin());
+            plugins.Add(new MutePluginCore());
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using SpotlightWPF.Extensions;
-using SpotlightWPF.Hotkey;
-using SpotlightWPF.Indexing;
-using SpotlightWPF.Models;
-using SpotlightWPF.Settings;
+﻿using Winspotlight.Extensions;
+using Winspotlight.Hotkey;
+using Winspotlight.Indexing;
+using Winspotlight.Models;
+using Winspotlight.Settings;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,8 +10,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Diagnostics;
+using MessageBox = System.Windows.Forms.MessageBox;
 
-namespace SpotlightWPF
+namespace Winspotlight
 {
     /// <summary>
     /// Spotlight main window
@@ -33,6 +35,7 @@ namespace SpotlightWPF
         private readonly Searcher searcher;
         private readonly NotifyIcon trayIcon;
 
+        private bool showTime;
 
 
 
@@ -57,7 +60,7 @@ namespace SpotlightWPF
 
 
 
-            Stream iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/SpotlightWPF;component/Images/spotlight.ico")).Stream;
+            Stream iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/Winspotlight;component/Images/spotlight.ico")).Stream;
             trayIcon = new NotifyIcon
             {
                 Icon = new System.Drawing.Icon(iconStream),
@@ -85,9 +88,18 @@ namespace SpotlightWPF
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (searcher == null) return;
+            Stopwatch w = Stopwatch.StartNew();
 
             searcher.Search(searchBox.Text);
+
+            w.Stop();
+            if (showTime) MessageBox.Show($"Search time {w.ElapsedMilliseconds}ms");
+            w.Restart();
+
             UpdateItems();
+
+            w.Stop();
+            if (showTime) MessageBox.Show($"Update time {w.ElapsedMilliseconds}ms");
         }
 
 
@@ -101,7 +113,7 @@ namespace SpotlightWPF
             for (int i = 0; i < Math.Min(searcher.searchResults.Count, presentModels.Count); i++)
             {
                 height += 60;
-                presentModels[i].Refresh(searcher.searchResults[i]);
+                presentModels[i].Refresh(searcher.searchResults[i], showTime);
                 if(i == 0)
                 {
                     presentModels[i].Select();
@@ -141,6 +153,9 @@ namespace SpotlightWPF
 
                 HideWindow();
             }
+
+            if (e.Key == Key.F1) showTime = true;
+            if (e.Key == Key.F2) showTime = false;
         }
 
         private void ShowWindow()
@@ -154,6 +169,9 @@ namespace SpotlightWPF
 
             // Change input language to english
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("en-US"));
+
+
+            searcher.OnWindowShown();
         }
 
         private void HideWindow()

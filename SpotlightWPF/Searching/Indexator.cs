@@ -1,14 +1,14 @@
 ﻿using Microsoft.Win32;
-using Spotlight.AppManagement;
-using Spotlight.Apps;
-using Spotlight.Extensions;
-using SpotlightWPF.Models;
+using Winspotlight.AppManagement;
+using Winspotlight.Apps;
+using Winspotlight.Extensions;
+using Winspotlight.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SpotlightWPF.Indexing
+namespace Winspotlight.Indexing
 {
     public static class Indexator
     {

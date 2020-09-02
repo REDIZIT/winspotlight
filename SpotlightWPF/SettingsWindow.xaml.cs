@@ -1,10 +1,10 @@
-﻿using SpotlightWPF.Indexing;
-using SpotlightWPF.Settings;
+﻿using Winspotlight.Indexing;
+using Winspotlight.Settings;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
-namespace SpotlightWPF
+namespace Winspotlight
 {
     public partial class SettingsWindow : Window
     {
