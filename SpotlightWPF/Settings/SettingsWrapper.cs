@@ -31,7 +31,8 @@ namespace Winspotlight.Settings
             }
             else
             {
-                Settings = new SettingsModel();
+                _settings = new SettingsModel();
+                Save();
             }
         }
 

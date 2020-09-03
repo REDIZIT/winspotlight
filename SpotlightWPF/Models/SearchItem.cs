@@ -3,6 +3,7 @@ using Winspotlight.Apps;
 using System;
 using System.Drawing;
 using System.IO;
+using Winspotlight.Plugins;
 
 namespace Winspotlight.Models
 {
@@ -12,6 +13,8 @@ namespace Winspotlight.Models
         public string displaySubName;
 
         public Bitmap iconBitmap;
+
+        public PluginCore sourcePlugin;
 
         public abstract void Execute(bool runAsAdministrator);
     }

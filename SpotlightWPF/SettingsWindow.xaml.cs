@@ -2,7 +2,12 @@
 using Winspotlight.Settings;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace Winspotlight
 {
@@ -17,6 +22,7 @@ namespace Winspotlight
 
             RefreshThemeBox();
             RefreshIndexIntervalsBox();
+            RefreshIgnoreList();
         }
 
         private void RefreshThemeBox()
@@ -32,6 +38,8 @@ namespace Winspotlight
 
                 SettingsWrapper.Settings.SelectedTheme = style;
                 SettingsWrapper.Save();
+
+                RefreshIgnoreList();
             };
         }
 
@@ -61,6 +69,71 @@ namespace Winspotlight
 
                 searcher.UpdateTimerInterval();
             };
+        }
+
+        private void RefreshIgnoreList()
+        {
+            IgnoreStackPanel.Children.Clear();
+
+            int i = -1;
+            SolidColorBrush evenColor = new SolidColorBrush(Color.FromArgb(30, 100, 100, 100));
+            SolidColorBrush oddColor = new SolidColorBrush(Color.FromArgb(30, 0, 0, 0));
+            foreach (string item in SettingsWrapper.Settings.IgnoreList)
+            {
+                // Ignore syntax is {displayName}#{displaySubName}
+                string displayName = item.Split('#')[0];
+                string displaySubName = item.Split('#')[1];
+                i++;
+
+
+
+
+                // Create presenter item
+                Grid grid = new Grid
+                {
+                    Height = 28
+                };
+                // Background rect
+                Rectangle rect = new Rectangle()
+                {
+                    Height = 28,
+                    Fill = i % 2 == 0 ? evenColor : oddColor
+                };
+
+
+
+                TextBlock nameText = new TextBlock()
+                {
+                    Text = displayName,
+                    FontSize = 11,
+                    Margin = new Thickness(14, 0, 0, 0),
+                    Style = Application.Current.FindResource("TextBlockStyle") as Style,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+
+                Button button = new Button()
+                {
+                    Content = "Return",
+                    FontSize = 10,
+                    Height = 22,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    Padding = new Thickness(10, 0, 10, 0),
+                    Margin = new Thickness(0, 0, 18, 0)
+                };
+                button.Click += (s, e) =>
+                {
+                    searcher.RemoveFromIgnoreList(displayName, displaySubName);
+                    RefreshIgnoreList();
+                };
+
+
+                grid.Children.Add(rect);
+                grid.Children.Add(nameText);
+                grid.Children.Add(button);
+
+
+                IgnoreStackPanel.Children.Add(grid);
+            }
         }
     }
 }

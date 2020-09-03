@@ -1,0 +1,27 @@
+﻿<Window x:Class="Winspotlight.InfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Winspotlight"
+        mc:Ignorable="d"
+        Title="InfoWindow" Height="227.979" Width="523.438" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Image Name="IconImage" HorizontalAlignment="Left" Height="40" Margin="18,18,0,0" VerticalAlignment="Top" Width="40"/>
+        <TextBlock Name="DisplayNameText" Style="{DynamicResource TextBlockStyle}" HorizontalAlignment="Left" Height="23" Margin="73,18,0,0" TextWrapping="Wrap" Text="Steam.lnk" VerticalAlignment="Top" Width="432" FontSize="18"/>
+        <TextBlock Name="SubNameText" Style="{DynamicResource SubTextBlockStyle}" HorizontalAlignment="Left" Height="18" Margin="73,44,0,0" TextWrapping="Wrap" Text="Shortcut on desktop" VerticalAlignment="Top" Width="432" FontSize="10"/>
+
+        <StackPanel Margin="10,59,10,10">
+            <TextBlock Name="ShortcutFilePathLabel" Style="{DynamicResource SubTextBlockStyle}" Height="14" TextWrapping="Wrap" Text="Shortcut path" VerticalAlignment="Top" FontSize="10" HorizontalAlignment="Left" Width="94"/>
+            <TextBox Name="ShortcutFilePathText" Height="23"  TextWrapping="Wrap" Text="" IsReadOnly="True"/>
+            <TextBlock Name="ExeFilePathLabel" Style="{DynamicResource SubTextBlockStyle}" Height="14"  TextWrapping="Wrap" Text=".exe path" VerticalAlignment="Top" FontSize="10" HorizontalAlignment="Left" Width="94"/>
+            <TextBox Name="ExeFilePathText" TextWrapping="Wrap" Text="" IsReadOnly="True" Height="23" VerticalAlignment="Top"/>
+
+            <StackPanel Orientation="Horizontal" Height="20"  Margin="0, 10, 0, 0">
+                <Button Name="AddToIgnoreListBtn" Content="Add to ignore list" FontSize="10" Padding="10,0" Click="AddToIgnoreListBtn_Click"></Button>
+                <Button Name="RemoveFromIgnoreListBtn" Content="Remove from ignore list" FontSize="10" Padding="10,0" Margin="10, 0" Click="RemoveFromIgnoreListBtn_Click"></Button>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>

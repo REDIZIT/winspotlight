@@ -10,8 +10,9 @@ namespace Winspotlight.Plugins.Embedded
 {
     public class MutePluginCore : PluginCore
     {
-        public new string name = "Mute Plugin";
-        public new string description = "Allows you to Mute and Unmute applications";
+        public string name = "Mute Plugin";
+        public override string GetName() { return "Mute Plugin"; }
+        public string description = "Allows you to Mute and Unmute applications";
 
         private List<SearchMuteItem> items;
         //private readonly Timer reindexTimer;
@@ -45,7 +46,10 @@ namespace Winspotlight.Plugins.Embedded
                 try
                 {
                     Process process = Process.GetProcessById(pId);
-                    items.Add(new SearchMuteItem("Mute plugin", process.Id, process.ProcessName));
+                    items.Add(new SearchMuteItem("Mute plugin", process.Id, process.ProcessName)
+                    {
+                        sourcePlugin = this
+                    });
                 }
                 catch { }
             }

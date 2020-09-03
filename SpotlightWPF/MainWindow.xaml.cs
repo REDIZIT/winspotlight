@@ -10,8 +10,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Diagnostics;
-using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Winspotlight
 {
@@ -35,8 +33,6 @@ namespace Winspotlight
         private readonly Searcher searcher;
         private readonly NotifyIcon trayIcon;
 
-        private bool showTime;
-
 
 
         public MainWindow()
@@ -44,6 +40,7 @@ namespace Winspotlight
             InitializeComponent();
 
             ThemeManager.ApplyTheme(SettingsWrapper.Settings.SelectedTheme);
+            searcher = new Searcher(this);
 
             // Create search slots
             for (int i = 0; i < 6; i++)
@@ -52,8 +49,6 @@ namespace Winspotlight
             }
             presentModels[0].Select();
 
-
-            searcher = new Searcher(this);
 
             HotkeyManager.Bind((s, e) => ShowWindow());
             ShowWindow();
@@ -88,24 +83,16 @@ namespace Winspotlight
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (searcher == null) return;
-            Stopwatch w = Stopwatch.StartNew();
 
             searcher.Search(searchBox.Text);
 
-            w.Stop();
-            if (showTime) MessageBox.Show($"Search time {w.ElapsedMilliseconds}ms");
-            w.Restart();
-
             UpdateItems();
-
-            w.Stop();
-            if (showTime) MessageBox.Show($"Update time {w.ElapsedMilliseconds}ms");
         }
 
 
         private void CreateItem()
         {
-            presentModels.Add(new SearchPresentUIItem(ui));
+            presentModels.Add(new SearchPresentUIItem(ui, searcher));
         }
         private void UpdateItems()
         {
@@ -113,7 +100,7 @@ namespace Winspotlight
             for (int i = 0; i < Math.Min(searcher.searchResults.Count, presentModels.Count); i++)
             {
                 height += 60;
-                presentModels[i].Refresh(searcher.searchResults[i], showTime);
+                presentModels[i].Refresh(searcher.searchResults[i]);
                 if(i == 0)
                 {
                     presentModels[i].Select();
@@ -149,13 +136,12 @@ namespace Winspotlight
             {
                 bool isShiftPressed = System.Windows.Input.Keyboard.IsKeyDown(Key.LeftShift) || System.Windows.Input.Keyboard.IsKeyDown(Key.RightShift);
 
-                presentModels[SelectedIndex].item.Execute(isShiftPressed);
-
+                // Needed before hiding
+                int selected = SelectedIndex;
                 HideWindow();
-            }
 
-            if (e.Key == Key.F1) showTime = true;
-            if (e.Key == Key.F2) showTime = false;
+                presentModels[selected].item.Execute(isShiftPressed);
+            }
         }
 
         private void ShowWindow()

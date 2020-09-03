@@ -12,10 +12,10 @@ namespace Winspotlight.Indexing
     public class Searcher
     {
         public List<SearchItem> searchResults = new List<SearchItem>();
-        List<SearchItem> indexed = new List<SearchItem>();
-
         public List<PluginCore> plugins = new List<PluginCore>();
 
+
+        private List<SearchItem> indexed = new List<SearchItem>();
 
         private readonly MainWindow mainWindow;
         private readonly Timer indexTimer;
@@ -48,7 +48,7 @@ namespace Winspotlight.Indexing
 
             // Add indexed files (not equating)
             searchResults.Clear();
-            searchResults.AddRange(indexed);
+            searchResults.AddRange(GetNotIgnoredItems(indexed));
 
             // Going thro all plugins and searching
             foreach (PluginCore plugin in plugins)
@@ -102,6 +102,21 @@ namespace Winspotlight.Indexing
                 plugin.Index();
             }
         }
+        public void AddToIgnoreList(SearchItem item)
+        {
+            SettingsWrapper.Settings.IgnoreList.Add(item.displayName + "#" + item.displaySubName);
+            SettingsWrapper.Save();
+        }
+        public void RemoveFromIgnoreList(SearchItem item)
+        {
+            SettingsWrapper.Settings.IgnoreList.Remove(item.displayName + "#" + item.displaySubName);
+            SettingsWrapper.Save();
+        }
+        public void RemoveFromIgnoreList(string displayName, string displaySubName)
+        {
+            SettingsWrapper.Settings.IgnoreList.Remove(displayName + "#" + displaySubName);
+            SettingsWrapper.Save();
+        }
 
         public void OnWindowShown()
         {
@@ -118,6 +133,20 @@ namespace Winspotlight.Indexing
         {
             plugins.Add(new WindowsCommandsPlugin());
             plugins.Add(new MutePluginCore());
+        }
+        private List<SearchItem> GetNotIgnoredItems(List<SearchItem> source)
+        {
+            List<SearchItem> result = new List<SearchItem>();
+
+            foreach (var item in source)
+            {
+                if (!SettingsWrapper.Settings.IgnoreList.Contains(item.displayName + "#" + item.displaySubName))
+                {
+                    result.Add(item);
+                }
+            }
+
+            return result;
         }
     }
 }

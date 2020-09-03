@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Winspotlight"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Settings" Height="259.688" Width="413.495" Style="{DynamicResource WindowStyle}" Icon="Images/spotlight.ico">
+        Title="Settings" Height="259.688" Width="480.04" Style="{DynamicResource WindowStyle}" Icon="Images/spotlight.ico">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="26,18,0,0" TextWrapping="Wrap" Text="Theme" VerticalAlignment="Top" Height="24" Width="45" Padding="0, 4"/>
         <ComboBox Name="themesBox" HorizontalAlignment="Right" Margin="0,18,10,0" VerticalAlignment="Top" Width="124" Background="#00161A21" Text="dark" />
@@ -14,5 +14,10 @@
         <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="26,47,0,0" TextWrapping="Wrap" Text="Index interval" VerticalAlignment="Top" Height="24" Width="145" Padding="0, 4"/>
         <ComboBox x:Name="intevalBox" HorizontalAlignment="Right" Margin="0,47,10,0" VerticalAlignment="Top" Width="124" Background="#00161A21" Text="dark" >
         </ComboBox>
+
+        <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="26,76,0,0" TextWrapping="Wrap" Text="Ignore list" VerticalAlignment="Top" Height="24" Width="145" Padding="0, 4"/>
+        <ScrollViewer HorizontalAlignment="Left" Margin="26,105,0,10" Width="436">
+            <StackPanel Name="IgnoreStackPanel" />
+        </ScrollViewer>
     </Grid>
 </Window>

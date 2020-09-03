@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Winspotlight.Indexing;
 
 namespace Winspotlight.Models
 {
@@ -13,17 +13,25 @@ namespace Winspotlight.Models
     {
         public SearchItem item;
 
+
+        public Image image;
+
         private Rectangle panel;
         private TextBlock nameText, subNameText;
-        private Image image, infoImage;
+        private Image infoImage;
 
-        //private readonly Brush defaultNameBrush;
+        private readonly Searcher searcher;
 
 
-        public SearchPresentUIItem(StackPanel parent)
+        public SearchPresentUIItem(StackPanel parent, Searcher searcher)
         {
-            Grid grid = new Grid();
-            grid.Height = 60;
+            this.searcher = searcher;
+
+
+            Grid grid = new Grid
+            {
+                Height = 60
+            };
 
 
             // Background rect
@@ -98,7 +106,7 @@ namespace Winspotlight.Models
             parent.Children.Add(grid);
         }
 
-        public void Refresh(SearchItem item, bool verbose)
+        public void Refresh(SearchItem item)
         {
             bool didItemChange = this.item != item;
             this.item = item;
@@ -110,16 +118,12 @@ namespace Winspotlight.Models
             nameText.Style = Application.Current.FindResource("TextBlockStyle") as Style;
             subNameText.Style = Application.Current.FindResource("TextBlockStyle") as Style;
 
-            Stopwatch w = Stopwatch.StartNew();
 
             if (didItemChange)
             {
                 BitmapImage bitmapImage = BitmapToImageSource(item.iconBitmap);
                 image.Source = bitmapImage;
             }
-
-            w.Stop();
-            if (verbose) MessageBox.Show($"Bitmap convert time {w.ElapsedMilliseconds}ms");
         }
 
 
@@ -140,7 +144,8 @@ namespace Winspotlight.Models
 
         public void ShowInfo(object s, RoutedEventArgs e)
         {
-            MessageBox.Show("Show info");
+            InfoWindow window = new InfoWindow(this, searcher);
+            window.Show();
         }
 
 

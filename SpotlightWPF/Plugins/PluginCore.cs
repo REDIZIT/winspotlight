@@ -9,6 +9,8 @@ namespace Winspotlight.Plugins
         public string name;
         public string description;
 
+        public abstract string GetName();
+
         /// <summary>Invoked when search window appears</summary>
         public Action onWindowShown;
 
