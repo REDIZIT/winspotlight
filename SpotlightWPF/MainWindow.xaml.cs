@@ -142,6 +142,11 @@ namespace Winspotlight
 
                 presentModels[selected].item.Execute(isShiftPressed);
             }
+
+            if (e.Key == Key.Escape)
+            {
+                HideWindow();
+            }
         }
 
         private void ShowWindow()
