@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using Winspotlight.SearchListerners;
 using Winspotlight.Plugins;
 using Winspotlight.Plugins.Embedded;
+using System;
+using Winspotlight.Utils;
 
 namespace Winspotlight.Indexing
 {

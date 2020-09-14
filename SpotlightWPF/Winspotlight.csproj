@@ -80,6 +80,7 @@
     <Compile Include="Settings\SettingsModel.cs" />
     <Compile Include="Settings\SettingsWrapper.cs" />
     <Compile Include="ThemeManager.cs" />
+    <Compile Include="Utils\ShortcutCreator.cs" />
     <Page Include="InfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

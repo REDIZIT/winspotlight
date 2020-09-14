@@ -8,21 +8,28 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Winspotlight.Utils;
 
 namespace Winspotlight
 {
     public partial class SettingsWindow : Window
     {
         private readonly Searcher searcher;
+        private bool isRefreshing;
 
         public SettingsWindow(Searcher searcher)
         {
             InitializeComponent();
             this.searcher = searcher;
 
+            isRefreshing = true;
+
             RefreshThemeBox();
             RefreshIndexIntervalsBox();
             RefreshIgnoreList();
+            RefreshAutorun();
+
+            isRefreshing = false;
         }
 
         private void RefreshThemeBox()
@@ -134,6 +141,25 @@ namespace Winspotlight
 
                 IgnoreStackPanel.Children.Add(grid);
             }
+        }
+
+
+        private void RefreshAutorun()
+        {
+            bool isEnabled = ShortcutCreator.IsInAutorun();
+            AutorunCheckbox.IsChecked = isEnabled;
+        }
+
+        private void AutorunCheckbox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (isRefreshing) return;
+            ShortcutCreator.AddToAutorun();
+        }
+
+        private void AutorunCheckbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (isRefreshing) return;
+            ShortcutCreator.RemoveFromAutorun();
         }
     }
 }

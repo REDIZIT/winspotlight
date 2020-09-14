@@ -51,7 +51,9 @@ namespace Winspotlight.Indexing
         {
             foreach (string file in Directory.GetFiles(path))
             {
-                tofill[file] = new SearchFileItem(Path.GetFileName(file), "Desktop", file)
+                string key = Path.GetExtension(file) == ".lnk" ? AppsLauncher.GetLinkTargetPath(file) : file;
+
+                tofill[key] = new SearchFileItem(Path.GetFileName(file), "Desktop", file)
                 {
                     iconBitmap = AppsIconExtractor.GetAppIconBitmap(file)
                 };

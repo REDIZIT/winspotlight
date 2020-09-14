@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Drawing;
 
 namespace Winspotlight
 {
@@ -51,7 +52,7 @@ namespace Winspotlight
 
 
             HotkeyManager.Bind((s, e) => ShowWindow());
-            ShowWindow();
+            //ShowWindow();
 
 
 
@@ -62,6 +63,8 @@ namespace Winspotlight
                 Visible = true
             };
             trayIcon.Click += (s, e) => ShowWindow();
+
+            HideWindow();
         }
 
         public void CloseWindow()
@@ -74,7 +77,25 @@ namespace Winspotlight
             SettingsWindow window = new SettingsWindow(searcher);
             window.Show();
         }
+        /// <summary>Move window to center of current monitor</summary>
+        private void MoveWindowToCenter()
+        {
+            //get the current monitor
+            Screen currentMonitor = Screen.FromHandle(new System.Windows.Interop.WindowInteropHelper(System.Windows.Application.Current.MainWindow).Handle);
 
+            //find out if our app is being scaled by the monitor
+            PresentationSource source = PresentationSource.FromVisual(System.Windows.Application.Current.MainWindow);
+            double dpiScaling = (source != null && source.CompositionTarget != null ? source.CompositionTarget.TransformFromDevice.M11 : 1);
+
+            //get the available area of the monitor
+            Rectangle workArea = currentMonitor.WorkingArea;
+            var workAreaWidth = (int)Math.Floor(workArea.Width * dpiScaling);
+            var workAreaHeight = (int)Math.Floor(workArea.Height * dpiScaling);
+
+            //move to the centre
+            System.Windows.Application.Current.MainWindow.Left = (((workAreaWidth - (Width * dpiScaling)) / 2) + (workArea.Left * dpiScaling));
+            System.Windows.Application.Current.MainWindow.Top = (((workAreaHeight - (Height * dpiScaling)) / 2) + (workArea.Top * dpiScaling));
+        }
 
 
 
@@ -161,6 +182,7 @@ namespace Winspotlight
             // Change input language to english
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("en-US"));
 
+            MoveWindowToCenter();
 
             searcher.OnWindowShown();
         }

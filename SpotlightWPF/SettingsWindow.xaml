@@ -15,9 +15,12 @@
         <ComboBox x:Name="intevalBox" HorizontalAlignment="Right" Margin="0,47,10,0" VerticalAlignment="Top" Width="124" Background="#00161A21" Text="dark" >
         </ComboBox>
 
-        <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="26,76,0,0" TextWrapping="Wrap" Text="Ignore list" VerticalAlignment="Top" Height="24" Width="145" Padding="0, 4"/>
-        <ScrollViewer Margin="26,105,10,10">
+        <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="26,105,0,0" TextWrapping="Wrap" Text="Ignore list" VerticalAlignment="Top" Height="24" Width="145" Padding="0, 4"/>
+        <ScrollViewer Margin="26,134,10,10">
             <StackPanel Name="IgnoreStackPanel" />
         </ScrollViewer>
+
+        <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="26,76,0,0" TextWrapping="Wrap" Text="Autorun" VerticalAlignment="Top" Height="24" Width="145" Padding="0, 4"/>
+        <CheckBox Name="AutorunCheckbox" Margin="0,87,10,0" VerticalAlignment="Top" Checked="AutorunCheckbox_Checked" Unchecked="AutorunCheckbox_Unchecked" HorizontalAlignment="Right" Width="15"/>
     </Grid>
 </Window>
