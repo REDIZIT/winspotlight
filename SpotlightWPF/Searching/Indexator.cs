@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using Winspotlight.AppManagement;
 using Winspotlight.Apps;
-using Winspotlight.Extensions;
 using Winspotlight.Models;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,9 @@ namespace Winspotlight.Indexing
         /// <summary>Index all that we can and return result</summary>
         public static List<SearchItem> IndexAll()
         {
-            List<SearchItem> result = new List<SearchItem>();
+            // Key is target file path
+            // Value is SearchItem
+            Dictionary<string, SearchItem> result = new Dictionary<string, SearchItem>();
 
 
             // Index all files on desktop
@@ -27,49 +28,43 @@ namespace Winspotlight.Indexing
             }
 
 
+            // Index windows installed apps
+            //
+            FillAppsInStartupPrograms(result);
+            GetAppsFromRegister(result);
+
+
             // Add Windows default apps
             //
-            result.Add(new SearchFileItem("Notepad", "Windows default app", @"C:\Windows\System32\notepad.exe"));
-            result.Add(new SearchFileItem("Calculator", "Windows default app", @"C:\Windows\System32\calc.exe"));
+            result["winapp:notepad"] = new SearchFileItem("Notepad", "Windows default app", @"C:\Windows\System32\notepad.exe");
+            result["winapp:calc"] = new SearchFileItem("Calculator", "Windows default app", @"C:\Windows\System32\calc.exe");
 
 
-            return result;
+            return result.Select(c => c.Value).ToList();
         }
 
 
 
 
         /// <summary>Fill list with files in folder</summary>
-        public static void IndexFilesInFolder(string path, List<SearchItem> listToFill)
+        private static void IndexFilesInFolder(string path, Dictionary<string, SearchItem> tofill)
         {
             foreach (string file in Directory.GetFiles(path))
             {
-                listToFill.Add(new SearchFileItem(Path.GetFileName(file), "Desktop", file)
+                tofill[file] = new SearchFileItem(Path.GetFileName(file), "Desktop", file)
                 {
                     iconBitmap = AppsIconExtractor.GetAppIconBitmap(file)
-                });
+                };
             }
         }
 
-        /// <summary>Get Windows installed apps</summary>
-        public static List<SearchFileItem> GetInstalledApps()
-        {
-            List<SearchFileItem> result = new List<SearchFileItem>();
-
-            GetAppsInRoamingPrograms(result);
-            GetAppsFromRegister(result);
-
-            result = result.DistinctBy(c => c.path).ToList();
-
-            return result;
-        }
 
         /// <summary>Get apps from C:\Users\%user%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs</summary>
-        public static List<SearchFileItem> GetAppsInRoamingPrograms(List<SearchFileItem> result)
+        private static void GetAppsInRoamingPrograms(Dictionary<string, SearchItem> result, string path)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            path += @"\Microsoft\Windows\Start Menu\Programs";
-            //MessageBox.Show(path);
+            //string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            //path += @"\Microsoft\Windows\Start Menu\Programs";
+            //string path = @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs";
 
             foreach (string lnkPath in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
             {
@@ -81,19 +76,26 @@ namespace Winspotlight.Indexing
                     if (targetPath.StartsWith(@"\")) continue;
                     if (!File.Exists(targetPath)) continue;
 
-                    result.Add(new SearchFileItem(Path.GetFileName(lnkPath), $"Window App {targetPath}", targetPath));
-                    //MessageBox.Show(targetPath);
+                    result[targetPath] = new SearchFileItem(Path.GetFileName(lnkPath), $"Window App {targetPath}", targetPath);
                 }
                 catch
                 {
                     continue;
                 }
             }
+        }
+        private static void FillAppsInStartupPrograms(Dictionary<string, SearchItem> result)
+        {
+            string roamingPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Start Menu\Programs";
+            string programDataPath = @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs";
 
-            return result;
+            GetAppsInRoamingPrograms(result, roamingPath);
+            GetAppsInRoamingPrograms(result, programDataPath);
         }
 
-        public static void GetAppsFromRegister(List<SearchFileItem> result)
+
+
+        private static void GetAppsFromRegister(Dictionary<string, SearchItem> result)
         {
             string path = @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall";
             RegistryKey key = Registry.LocalMachine.OpenSubKey(path);
@@ -117,7 +119,7 @@ namespace Winspotlight.Indexing
                 string exePath = CleanDisplayIconValue(displayIconValue as string);
 
                 //MessageBox.Show(JsonConvert.SerializeObject(subkey));
-                result.Add(new SearchFileItem(Path.GetFileName(exePath), $"Windows App {exePath}", exePath));
+                result[exePath] = new SearchFileItem(Path.GetFileName(exePath), $"Windows App {exePath}", exePath);
             }
         }
 
