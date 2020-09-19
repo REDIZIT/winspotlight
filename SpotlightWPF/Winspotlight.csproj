@@ -74,6 +74,9 @@
     <Compile Include="Plugins\Embedded\MutePlugin\WindowsSoundAPI.cs" />
     <Compile Include="Plugins\PluginCore.cs" />
     <Compile Include="Plugins\Embedded\WindowsCommandsPlugin.cs" />
+    <Compile Include="Searching\Index\DesktopIndexator.cs" />
+    <Compile Include="Searching\Index\RegisterIndexator.cs" />
+    <Compile Include="Searching\Index\StartUpFolderIndexator.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -99,7 +102,7 @@
     <Compile Include="Extensions\MathUtils.cs" />
     <Compile Include="FuzzyMatch.cs" />
     <Compile Include="HotkeyManager.cs" />
-    <Compile Include="Searching\Indexator.cs" />
+    <Compile Include="Searching\Index\Indexator.cs" />
     <Compile Include="Searching\Searcher.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

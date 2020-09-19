@@ -51,6 +51,7 @@ namespace Winspotlight.Models
                 Text = "Name",
                 Margin = new Thickness(70, 8, 0, 0),
                 FontSize = 20,
+                FontWeight = FontWeights.SemiBold,
                 Style = Application.Current.FindResource("TextBlockStyle") as Style
             };
             this.nameText = nameText;
@@ -60,7 +61,7 @@ namespace Winspotlight.Models
             {
                 Text = "Window app",
                 Margin = new Thickness(70, 32, 0, 0),
-                FontSize = 12,
+                FontSize = 11,
                 Style = Application.Current.FindResource("TextBlockStyle") as Style
             };
             subNameText = subText;
