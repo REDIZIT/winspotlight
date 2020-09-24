@@ -31,6 +31,11 @@ namespace Winspotlight.Indexing
             result["winapp:notepad"] = new SearchFileItem("Notepad", "Windows default app", @"C:\Windows\System32\notepad.exe");
             result["winapp:calc"] = new SearchFileItem("Calculator", "Windows default app", @"C:\Windows\System32\calc.exe");
 
+            // Remove unintallers
+            foreach (var item in result.Where(c => c.Value.displayName.ToLower().Contains("uninstall")).ToList())
+            {
+                result.Remove(item.Key);
+            }
 
             return result.Select(c => c.Value).ToList();
         }
