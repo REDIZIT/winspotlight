@@ -31,8 +31,8 @@ namespace Winspotlight
 
 
 
-        private readonly Searcher searcher;
-        private readonly NotifyIcon trayIcon;
+        private static Searcher searcher;
+        private static NotifyIcon trayIcon;
 
 
 
@@ -67,12 +67,12 @@ namespace Winspotlight
             HideWindow();
         }
 
-        public void CloseWindow()
+        public static void CloseWindow()
         {
             trayIcon.Dispose();
             System.Windows.Application.Current.Shutdown();
         }
-        public void OpenSettings()
+        public static void OpenSettings()
         {
             SettingsWindow window = new SettingsWindow(searcher);
             window.Show();

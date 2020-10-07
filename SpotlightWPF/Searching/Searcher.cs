@@ -6,8 +6,6 @@ using System.Windows.Forms;
 using Winspotlight.SearchListerners;
 using Winspotlight.Plugins;
 using Winspotlight.Plugins.Embedded;
-using System;
-using Winspotlight.Utils;
 
 namespace Winspotlight.Indexing
 {
@@ -35,7 +33,7 @@ namespace Winspotlight.Indexing
             indexTimer.Tick += (s, e) => Index();
             indexTimer.Start();
 
-            AddSearchUpdateListeners();
+            AddEmbeddedPlugins();
         }
 
 
@@ -90,13 +88,6 @@ namespace Winspotlight.Indexing
         {
             indexed = Indexator.IndexAll();
 
-            // Add spotlight items
-            //
-            indexed.Add(new SearchDelegateItem("Close", "Spotlight", (item) => mainWindow.CloseWindow()));
-            indexed.Add(new SearchDelegateItem("Settings", "Spotlight", (item) => mainWindow.OpenSettings()));
-            indexed.Add(new SearchDelegateItem("Sleep", "Spotlight", (item) => Application.SetSuspendState(PowerState.Suspend, true, true)));
-            indexed.Add(new SearchDelegateItem("Hibernate", "Spotlight", (item) => Application.SetSuspendState(PowerState.Hibernate, true, true)));
-
             // Ping plugins for reindex
             //
             foreach (PluginCore plugin in plugins)
@@ -131,10 +122,11 @@ namespace Winspotlight.Indexing
 
 
 
-        private void AddSearchUpdateListeners()
+        private void AddEmbeddedPlugins()
         {
             plugins.Add(new WindowsCommandsPlugin());
             plugins.Add(new MutePluginCore());
+            plugins.Add(new SpotlightEmbedPlugin());
         }
         private List<SearchItem> GetNotIgnoredItems(List<SearchItem> source)
         {

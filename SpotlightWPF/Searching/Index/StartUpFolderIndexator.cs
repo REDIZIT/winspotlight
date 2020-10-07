@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 using Winspotlight.Apps;
 using Winspotlight.Models;
 
@@ -24,21 +25,24 @@ namespace Winspotlight.Searching.Index
         /// <summary>Get apps from C:\Users\%user%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs</summary>
         private static void GetAppsInRoamingPrograms(Dictionary<string, SearchItem> result, string path)
         {
-            foreach (string lnkPath in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
+            foreach (string subFolderPath in Directory.GetDirectories(path))
             {
-                try
+                foreach (string lnkPath in Directory.GetFiles(subFolderPath, "*", SearchOption.AllDirectories))
                 {
-                    string targetPath = AppsLauncher.GetLinkTargetPath(lnkPath);
+                    try
+                    {
+                        string targetPath = AppsLauncher.GetLinkTargetPath(lnkPath);
 
-                    // If path is relative
-                    if (targetPath.StartsWith(@"\")) continue;
-                    if (!File.Exists(targetPath)) continue;
+                        // If path is relative
+                        if (targetPath.StartsWith(@"\")) continue;
+                        if (!File.Exists(targetPath)) continue;
 
-                    result[targetPath] = new SearchFileItem(Path.GetFileName(lnkPath), $"App", targetPath);
-                }
-                catch
-                {
-                    continue;
+                        result[targetPath] = new SearchFileItem(Path.GetFileName(lnkPath), $"App", targetPath);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
                 }
             }
         }

@@ -67,9 +67,10 @@ namespace Winspotlight.Apps
             string shortcutFile = lnkPath;
             IWshShortcut sc = (IWshShortcut)ws.CreateShortcut(shortcutFile);
 
-            string correctPath = sc.WorkingDirectory + @"\" + Path.GetFileName(sc.TargetPath);
+            //string correctPath = sc.WorkingDirectory + @"\" + Path.GetFileName(sc.TargetPath);
+            string correctPath = sc.TargetPath;
 
-            return correctPath;
+            return correctPath.Replace(@"\\", @"\").Replace("//", "/");
         }
     }
 }
