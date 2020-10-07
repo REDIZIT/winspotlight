@@ -72,9 +72,10 @@
     <Compile Include="Plugins\Embedded\MutePlugin\MutePluginCore.cs" />
     <Compile Include="Plugins\Embedded\MutePlugin\SearchMuteItem.cs" />
     <Compile Include="Plugins\Embedded\MutePlugin\WindowsSoundAPI.cs" />
-    <Compile Include="Plugins\Embedded\SpotlightEmbedPlugin.cs" />
+    <Compile Include="Plugins\Embedded\Spotlight\SpotlightEmbedPlugin.cs" />
     <Compile Include="Plugins\PluginCore.cs" />
     <Compile Include="Plugins\Embedded\WindowsCommandsPlugin.cs" />
+    <Compile Include="Plugins\PluginHelper.cs" />
     <Compile Include="Searching\Index\DesktopIndexator.cs" />
     <Compile Include="Searching\Index\RegisterIndexator.cs" />
     <Compile Include="Searching\Index\StartUpFolderIndexator.cs" />
@@ -173,6 +174,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Plugins\Embedded\MutePlugin\Images\unmute.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Plugins\Embedded\Spotlight\Images\main.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
