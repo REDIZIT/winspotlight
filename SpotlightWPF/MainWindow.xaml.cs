@@ -41,7 +41,7 @@ namespace Winspotlight
             InitializeComponent();
 
             ThemeManager.ApplyTheme(SettingsWrapper.Settings.SelectedTheme);
-            searcher = new Searcher(this);
+            searcher = new Searcher();
 
             // Create search slots
             for (int i = 0; i < 6; i++)
@@ -52,8 +52,6 @@ namespace Winspotlight
 
 
             HotkeyManager.Bind((s, e) => ShowWindow());
-            //ShowWindow();
-
 
 
             Stream iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/Winspotlight;component/Images/spotlight.ico")).Stream;

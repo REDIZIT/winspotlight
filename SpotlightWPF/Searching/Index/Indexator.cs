@@ -22,8 +22,8 @@ namespace Winspotlight.Indexing
 
             // Index windows installed apps
             //
-            StartUpFolderIndexator.FillAppsInStartupPrograms(result);
             RegisterIndexator.FillAppsFromRegister(result);
+            StartUpFolderIndexator.FillAppsInStartupPrograms(result);
 
 
             // Add Windows default apps
@@ -32,7 +32,7 @@ namespace Winspotlight.Indexing
             result["winapp:calc"] = new SearchFileItem("Calculator", "Windows default app", @"C:\Windows\System32\calc.exe");
 
             // Remove unintallers
-            foreach (var item in result.Where(c => c.Value.displayName.ToLower().Contains("uninstall")).ToList())
+            foreach (var item in result.Where(c => c.Value.displayName.ToLower().Contains("unins")).ToList())
             {
                 result.Remove(item.Key);
             }

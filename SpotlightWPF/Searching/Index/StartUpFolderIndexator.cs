@@ -18,31 +18,28 @@ namespace Winspotlight.Searching.Index
             string roamingPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Start Menu\Programs";
             string programDataPath = @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs";
 
-            GetAppsInRoamingPrograms(result, roamingPath);
-            GetAppsInRoamingPrograms(result, programDataPath);
+            FillDictionaryWithShortcuts(result, roamingPath);
+            FillDictionaryWithShortcuts(result, programDataPath);
         }
 
         /// <summary>Get apps from C:\Users\%user%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs</summary>
-        private static void GetAppsInRoamingPrograms(Dictionary<string, SearchItem> result, string path)
+        private static void FillDictionaryWithShortcuts(Dictionary<string, SearchItem> result, string folderPath)
         {
-            foreach (string subFolderPath in Directory.GetDirectories(path))
+            foreach (string lnkPath in Directory.GetFiles(folderPath, "*", SearchOption.AllDirectories))
             {
-                foreach (string lnkPath in Directory.GetFiles(subFolderPath, "*", SearchOption.AllDirectories))
+                try
                 {
-                    try
-                    {
-                        string targetPath = AppsLauncher.GetLinkTargetPath(lnkPath);
+                    string targetPath = AppsLauncher.GetLinkTargetPath(lnkPath);
 
-                        // If path is relative
-                        if (targetPath.StartsWith(@"\")) continue;
-                        if (!File.Exists(targetPath)) continue;
+                    // If path is relative
+                    if (targetPath.StartsWith(@"\")) continue;
+                    if (!File.Exists(targetPath)) continue;
 
-                        result[targetPath] = new SearchFileItem(Path.GetFileName(lnkPath), $"App", targetPath);
-                    }
-                    catch
-                    {
-                        continue;
-                    }
+                    result[targetPath] = new SearchFileItem(Path.GetFileName(lnkPath), $"App", targetPath);
+                }
+                catch
+                {
+                    continue;
                 }
             }
         }

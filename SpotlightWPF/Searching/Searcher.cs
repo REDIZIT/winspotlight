@@ -17,14 +17,11 @@ namespace Winspotlight.Indexing
 
         private List<SearchItem> indexed = new List<SearchItem>();
 
-        private readonly MainWindow mainWindow;
         private readonly Timer indexTimer;
 
 
-        public Searcher(MainWindow mainWindow)
+        public Searcher()
         {
-            this.mainWindow = mainWindow;
-
             Index();
 
             // Initialize timer for runtime indexing files
@@ -37,9 +34,9 @@ namespace Winspotlight.Indexing
         }
 
 
-        public void Search(string str)
+        public void Search(string quary)
         {
-            if (string.IsNullOrWhiteSpace(str))
+            if (string.IsNullOrWhiteSpace(quary))
             {
                 searchResults.Clear();
                 return;
@@ -53,7 +50,7 @@ namespace Winspotlight.Indexing
             // Going thro all plugins and searching
             foreach (PluginCore plugin in plugins)
             {
-                IEnumerable<SearchItem> results = plugin.SearchItems(str);
+                IEnumerable<SearchItem> results = plugin.SearchItems(quary);
                 if (results == null || results.Count() == 0) continue;
 
                 searchResults.AddRange(results);
@@ -62,8 +59,8 @@ namespace Winspotlight.Indexing
             // Select items which have FuzzySearch score > 0
             // Sort by score down
             searchResults = searchResults
-                .Where(c => GetScore(c.displayName, str) > 0)
-                .OrderByDescending(c => GetScore(c.displayName, str)).ToList();
+                .Where(c => GetScore(c.displayName, quary) > 0)
+                .OrderByDescending(c => GetScore(c.displayName, quary)).ToList();
         }
 
         public void UpdateTimerInterval()
@@ -88,8 +85,6 @@ namespace Winspotlight.Indexing
         {
             indexed = Indexator.IndexAll();
 
-            // Ping plugins for reindex
-            //
             foreach (PluginCore plugin in plugins)
             {
                 plugin.Index();
