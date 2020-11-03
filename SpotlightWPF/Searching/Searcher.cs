@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Winspotlight.SearchListerners;
 using Winspotlight.Plugins;
 using Winspotlight.Plugins.Embedded;
+using Winspotlight.Plugins.Embedded.Steam;
 
 namespace Winspotlight.Indexing
 {
@@ -122,6 +123,7 @@ namespace Winspotlight.Indexing
             plugins.Add(new WindowsCommandsPlugin());
             plugins.Add(new MutePluginCore());
             plugins.Add(new SpotlightEmbedPlugin());
+            plugins.Add(new SteamPlugin());
         }
         private List<SearchItem> GetNotIgnoredItems(List<SearchItem> source)
         {

@@ -15,20 +15,11 @@ namespace Winspotlight.Plugins.Embedded
         public string description = "Allows you to Mute and Unmute applications";
 
         private List<SearchMuteItem> items;
-        //private readonly Timer reindexTimer;
 
         public static Bitmap muteIcon, unmuteIcon;
 
         public MutePluginCore()
         {
-            //// Adding reindex timer for each second
-            //// Reindex takes ~20ms
-            //reindexTimer = new Timer()
-            //{
-            //    Interval = 10 * 1000
-            //};
-            //reindexTimer.Elapsed += (s, e) => Index();
-            //reindexTimer.Start();
             onWindowShown += Index;
 
             muteIcon = Image.FromStream(Application.GetResourceStream(new System.Uri("pack://application:,,,/Plugins/Embedded/MutePlugin/Images/mute.png")).Stream) as Bitmap;
@@ -60,6 +51,7 @@ namespace Winspotlight.Plugins.Embedded
             List<SearchItem> result = new List<SearchItem>();
             //reindexTimer.Stop();
 
+            if (!searchText.ToLower().Contains("mute")) return result;
 
             if (items == null || items.Count == 0) Index();
 

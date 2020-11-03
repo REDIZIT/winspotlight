@@ -48,12 +48,12 @@ public static class FuzzyMatcher
 		const int camelBonus = 10;                  // bonus if match is uppercase and prev is lower
 
 		const float matchesCountBonus = 1f;
-		const int wordMatchesCountBonus = 20;
-		const int wordCamelMatchesCountBonus = 30;
+		const int wordMatchesCountBonus = 100;      // Default was 20
+		const int wordCamelMatchesCountBonus = 200; // Default was 30
 
 		const int leadingLetterPenalty = -3;        // penalty applied for every letter in stringToSearch before the first match
 		const int maxLeadingLetterPenalty = -9;     // maximum penalty for leading letters
-		const int unmatchedLetterPenalty = -1;      // penalty for every letter that doesn't matter
+		const int unmatchedLetterPenalty = -3;      // penalty for every letter that doesn't matter
 
 
 

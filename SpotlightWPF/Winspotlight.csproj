@@ -73,6 +73,8 @@
     <Compile Include="Plugins\Embedded\MutePlugin\SearchMuteItem.cs" />
     <Compile Include="Plugins\Embedded\MutePlugin\WindowsSoundAPI.cs" />
     <Compile Include="Plugins\Embedded\Spotlight\SpotlightEmbedPlugin.cs" />
+    <Compile Include="Plugins\Embedded\Steam\AcfReader.cs" />
+    <Compile Include="Plugins\Embedded\Steam\SteamPlugin.cs" />
     <Compile Include="Plugins\PluginCore.cs" />
     <Compile Include="Plugins\Embedded\WindowsCommandsPlugin.cs" />
     <Compile Include="Plugins\PluginHelper.cs" />
@@ -175,7 +177,11 @@
   <ItemGroup>
     <Resource Include="Plugins\Embedded\MutePlugin\Images\unmute.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Plugins\Embedded\Steam\steamicon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Plugins\Embedded\Spotlight\Images\main.png" />
   </ItemGroup>

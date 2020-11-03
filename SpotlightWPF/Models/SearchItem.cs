@@ -57,7 +57,14 @@ namespace Winspotlight.Models
             }
             catch
             {
-                AppsLauncher.RunLink(this, isAdmin);
+                try
+                {
+                    AppsLauncher.RunFile(this, !isAdmin);
+                }
+                catch
+                {
+                    AppsLauncher.RunLink(this, isAdmin);
+                }
             }
         }
     }

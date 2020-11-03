@@ -68,7 +68,23 @@ namespace Winspotlight.Apps
             IWshShortcut sc = (IWshShortcut)ws.CreateShortcut(shortcutFile);
 
             //string correctPath = sc.WorkingDirectory + @"\" + Path.GetFileName(sc.TargetPath);
+            
+            // First variant
             string correctPath = sc.TargetPath;
+
+
+            // Second variant (ConEmu program problem)
+
+            /// [ Explanation of bug ]
+            /// sc.TargetPath for ConEmu => C:\Program Files (x86)\ConEmu\ConEmu64.exe
+            /// but ConEmu installed => C:\Program Files\ConEmu\ConEmu64.exe
+            /// But Windows says that 'Объект' is C:\Program Files\ConEmu\ConEmu64.exe
+            /// And anyway IWshShortcut says that 'Объект' is in (x86) folder
+            if (!System.IO.File.Exists(correctPath))
+            {
+                correctPath = Path.Combine(sc.WorkingDirectory, Path.GetFileName(correctPath));
+            }
+            
 
             return correctPath.Replace(@"\\", @"\").Replace("//", "/");
         }

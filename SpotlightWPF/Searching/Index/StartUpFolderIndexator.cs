@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows;
 using Winspotlight.Apps;
 using Winspotlight.Models;
 
@@ -31,6 +30,10 @@ namespace Winspotlight.Searching.Index
                 {
                     string targetPath = AppsLauncher.GetLinkTargetPath(lnkPath);
 
+                    //if (IsUrl(targetPath)) continue;
+                    if (IsPathToUrlFile(targetPath)) continue;
+                    if (IsWindowsBullshitProgram(targetPath)) continue;
+
                     // If path is relative
                     if (targetPath.StartsWith(@"\")) continue;
                     if (!File.Exists(targetPath)) continue;
@@ -42,6 +45,27 @@ namespace Winspotlight.Searching.Index
                     continue;
                 }
             }
+        }
+
+
+        //private static bool IsUrl(string url)
+        //{
+        //    Uri uriResult;
+        //    bool result = Uri.TryCreate(url, UriKind.Absolute, out uriResult)
+        //        && uriResult.Scheme == Uri.UriSchemeHttp;
+
+        //    return result;
+        //}
+        private static bool IsPathToUrlFile(string filepath)
+        {
+            return Path.GetExtension(filepath) == ".url";
+        }
+
+        private static bool IsWindowsBullshitProgram(string filepath)
+        {
+            bool result = filepath.ToLower().Contains("system32");
+
+            return result;
         }
     }
 }

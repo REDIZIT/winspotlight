@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Winspotlight.Searching.Index;
+using IWshRuntimeLibrary;
+using Newtonsoft.Json;
+using Winspotlight.Apps;
 
 namespace Winspotlight.Indexing
 {
@@ -30,6 +33,7 @@ namespace Winspotlight.Indexing
             //
             result["winapp:notepad"] = new SearchFileItem("Notepad", "Windows default app", @"C:\Windows\System32\notepad.exe");
             result["winapp:calc"] = new SearchFileItem("Calculator", "Windows default app", @"C:\Windows\System32\calc.exe");
+            result["winapp:cmd"] = new SearchFileItem("Command prompt", "Windows default app", @"C:\Windows\System32\cmd.exe");
 
             // Remove unintallers
             foreach (var item in result.Where(c => c.Value.displayName.ToLower().Contains("unins")).ToList())
